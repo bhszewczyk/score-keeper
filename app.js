@@ -59,6 +59,7 @@ function checkGameStatus(playerScore) {
 
 	setTimeout(function () {
 		endResultDisplay.innerText = 'Click reset to start over';
+		endResultDisplay.style.color = 'black';
 		resetBtn.disabled = false;
 		// reset();
 	}, 3000);
