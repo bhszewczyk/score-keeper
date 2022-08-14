@@ -7,9 +7,8 @@ const player1Display = document.querySelector('#p1Display');
 const player2Display = document.querySelector('#p2Display');
 const endResultDisplay = document.querySelector('#result');
 
-// let player1Score = 0;
-// let player2Score = 0;
-// playToPoints = parseInt(playToSelector.value);
+const resetBar = document.querySelector('#reset-progress');
+const resetText = document.querySelector('#reset-text');
 
 reset();
 
@@ -57,11 +56,16 @@ function checkGameStatus(playerScore) {
 	player2Btn.disabled = true;
 	resetBtn.disabled = true;
 
+	resetBar.classList.add('progress');
+	const moveBar = moveProgressBar(3000);
+	resetText.innerText = 'Reseting...';
+	resetText.style.color = 'black';
+
 	setTimeout(function () {
-		endResultDisplay.innerText = 'Click reset to start over';
-		endResultDisplay.style.color = 'black';
 		resetBtn.disabled = false;
-		// reset();
+		resetBar.classList.remove('progress');
+		clearInterval(moveBar);
+		reset();
 	}, 3000);
 }
 
@@ -69,13 +73,32 @@ function reset() {
 	player1Score = 0;
 	player2Score = 0;
 	playToPoints = parseInt(playToSelector.value);
+	resetBar.classList.remove('progress');
 
 	player1Display.innerText = player1Score;
 	player2Display.innerText = player2Score;
 	endResultDisplay.innerText = '';
+	resetText.innerText = '';
 
 	playToSelector.disabled = false;
 	player1Btn.disabled = false;
 	player2Btn.disabled = false;
 	resetBtn.disabled = false;
+}
+
+function moveProgressBar(time) {
+	let width = 100;
+	let tick = 1000 / 60;
+	let decreaseBarBy = 100 / (time / tick);
+	const moveBar = setInterval(updateProgressBar, tick);
+
+	function updateProgressBar() {
+		if (width > 0) {
+			console.log(width);
+			width -= decreaseBarBy;
+			resetBar.style.width = width + '%';
+		}
+	}
+
+	return moveBar;
 }

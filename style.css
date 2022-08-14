@@ -81,6 +81,7 @@ h2 {
 
 .button {
 	font-size: 1.6rem;
+	color: black;
 	width: 250px;
 	display: inline-block;
 	padding: 1.2rem 2.4rem;
@@ -116,4 +117,24 @@ h2 {
 #reset:hover,
 #reset:focus {
 	background-color: rgb(179, 178, 178);
+}
+
+.button:disabled {
+	color: rgb(116, 116, 116);
+	cursor: not-allowed;
+}
+
+.progress-bar {
+	height: 2px;
+	width: 100%;
+	overflow: hidden;
+	margin: 0.8rem 0;
+}
+
+.progress {
+	background-color: dimgray;
+}
+
+#reset-text {
+	font-size: 1.2rem;
 }
